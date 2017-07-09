@@ -50,7 +50,10 @@ function init(i18next, $) {
     } else if (attr === 'prepend') {
       ele.prepend(i18next.t(key, extendDefault(opts, ele.html())));
     } else if (attr === 'append') {
-      ele.append(i18next.t(key, extendDefault(opts, ele.html())));
+      if (ele.html().includes(i18next.t(key, extendDefault(opts, ele.html())))) {
+                    return;
+                }
+                ele.append(i18next.t(key, extendDefault(opts, ele.html())));
     } else if (attr.indexOf('data-') === 0) {
       var dataAttr = attr.substr('data-'.length);
       var translated = i18next.t(key, extendDefault(opts, ele.data(dataAttr)));
